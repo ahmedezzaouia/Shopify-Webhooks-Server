@@ -12,9 +12,7 @@ app.use(express.json());
 dotenv.config(); 
 
 // Set port number
-const port = 5000 || process.env.PORT;
-
-
+const port = process.env.PORT || 5000;
 
 const stores = {
   store_uk: {

@@ -13,10 +13,6 @@ dotenv.config(); // Load environment variables from a .env file
 // Set port number
 const port = 5000 || process.env.PORT;
 
-app.get("/",  (req, res) => {
-  res.send("Hello from your Server")
-})
-
 // Define a route for handling POST requests to the root path
 app.post("/", async (req, res) => {
   // Log the request ID and body to the console

@@ -18,9 +18,12 @@ app.get("/",  (req, res) => {
 })
 // Define a route for handling POST requests to the root path
 app.post("/", async (req, res) => {
-  // Log the request ID and body to the console
+  console.log("🚀 ~ file: index.js:44 ~ app.post ~ process.env.ACCESS_TOKEN:", process.env.ACCESS_TOKEN)  
+  console.log("🚀 ~ file: index.js:23 ~ app.post ~ process.env.STORE_URL:", process.env.STORE_URL)
   console.log("🚀 ~ file: index.js:14 ~ app.post ~ req.body.id:", req.body.id);
   console.log("🚀 ~ file: index.js:15 ~ app.post ~ req.body:", req.body);
+
+
 
   // Check if the request body contains an order ID
   if (req.body.id) {

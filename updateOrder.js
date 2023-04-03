@@ -27,7 +27,7 @@ const updateOrder = async (order_id, key, value, storeData) => {
       },
     });
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 };
 

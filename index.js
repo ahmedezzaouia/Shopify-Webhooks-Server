@@ -62,8 +62,9 @@ app.post("/", async (req, res) => {
       await updateOrder(req.body.id, "payment_gateway:", payment_name, storeData); // Call the updateOrder function with the order ID and other parameters
     }
   } catch (error) {
-    console.log(error); // Log any errors that occur
+    console.error(error.message);
   }
+  
   
 });
 

@@ -14,7 +14,6 @@ const updateOrder = async (order_id, key, value, storeData) => {
     }
     // extract order data from response
     const order = response.data.order;
-    console.log("🚀 ~ file: updateOrder.js:17 ~ updateOrder ~ order:", order)
     // add new note attribute to existing ones
     const noteAttributes = [...order.note_attributes, { name: key, value }];
     // make a PUT request to Shopify API to update order with new note attribute

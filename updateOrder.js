@@ -1,12 +1,12 @@
 import axios from 'axios'
 
 // function to update order with new note attribute
-const updateOrder = async (order_id, key, value) => {
+const updateOrder = async (order_id, key, value, storeData) => {
   try {
     // make a GET request to Shopify API to retrieve order data
     const response = await axios({
       method: "GET",
-      url: `${process.env.STORE_URL}/admin/orders/${order_id}.json?access_token=${process.env.ACCESS_TOKEN}`,
+      url: `${storeData.storeUrl}/admin/orders/${order_id}.json?access_token=${storeData.accessToken}`,
     });
     // extract order data from response
     const order = response.data.order;
@@ -19,7 +19,7 @@ const updateOrder = async (order_id, key, value) => {
     // make a PUT request to Shopify API to update order with new note attribute
     await axios({
       method: "put",
-      url: `${process.env.STORE_URL}/admin/orders/${order_id}.json?access_token=${process.env.ACCESS_TOKEN}`,
+      url: `${storeData.storeUrl}/admin/orders/${order_id}.json?access_token=${storeData.accessToken}`,
       data: {
         order: {
           note_attributes: noteAttributes,

@@ -21,23 +21,25 @@ app.get("/",  (req, res) => {
 app.post("/", async (req, res) => {
   console.log("🚀 ~ file: index.js:44 ~ app.post ~ process.env.ACCESS_TOKEN:", process.env.ACCESS_TOKEN)  
   console.log("🚀 ~ file: index.js:23 ~ app.post ~ process.env.STORE_URL:", process.env.STORE_URL)
-  console.log("🚀 ~ file: index.js:42 ~ app.post ~ payment_gateway_names:", ", ".join(req.body.payment_gateway_names))
-
+  
   // Check if the request body contains an order ID
-  if (req.body.id) {
-    res.status(200).end(); // Respond with a 200 status code and an empty response body
-  } else {
+  if (!req.body.id) {
     res.status(400).send("invalid order id"); // Respond with a 400 status code and an error message
     return; // Exit the function
   }
 
   try {
-    const payment_refference = ", ".join(req.body.payment_gateway_names)
-    // Call the updateOrder function with the order ID and other parameters
-    await updateOrder(req.body.id, "payment_info:", payment_refference);
+    const payment_gateway_names = req.body.payment_gateway_names || []; // Ensure that payment_gateway_names is an array, even if it is not provided in the request body
+    const validPaymentGatewayNames = payment_gateway_names.filter(name => name && typeof name === 'string'); // Filter out any invalid or empty values in the array
+    const payment_refference = validPaymentGatewayNames.join(", "); // Join the filtered array using ", " as a separator
+    if (payment_refference) {
+      await updateOrder(req.body.id, "payment_info:", payment_refference); // Call the updateOrder function with the order ID and other parameters
+    }
   } catch (error) {
     console.log(error); // Log any errors that occur
   }
+  
+  res.status(200).end(); // Respond with a 200 status code and an empty response body
 });
 
 // Start the server and listen on the specified port

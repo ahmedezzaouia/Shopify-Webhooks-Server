@@ -8,14 +8,13 @@ const updateOrder = async (order_id, key, value, storeData) => {
       method: "GET",
       url: `${storeData.storeUrl}/admin/orders/${order_id}.json?access_token=${storeData.accessToken}`,
     });
+    if (!response.data.order) {
+      throw new Error(`Order ${order_id} not found`);
+    }
     // extract order data from response
     const order = response.data.order;
     // add new note attribute to existing ones
     const noteAttributes = [...order.note_attributes, { name: key, value }];
-    // if no order data is found, exit function
-    if (!order) {
-      return;
-    }
     // make a PUT request to Shopify API to update order with new note attribute
     await axios({
       method: "put",

@@ -9,7 +9,7 @@
   },
   "author": "",
   "engines": {
-    "node":"v19.8.1"
+    "node":"18.x"
   },
   "license": "ISC",
   "dependencies": {

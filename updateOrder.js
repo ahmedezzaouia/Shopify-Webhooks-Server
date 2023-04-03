@@ -2,6 +2,7 @@ import axios from 'axios'
 
 // function to update order with new note attribute
 const updateOrder = async (order_id, key, value, storeData) => {
+  console.log("🚀 ~ file: updateOrder.js:5 ~ updateOrder ~ storeData:", storeData)
   try {
     // make a GET request to Shopify API to retrieve order data
     const response = await axios({
